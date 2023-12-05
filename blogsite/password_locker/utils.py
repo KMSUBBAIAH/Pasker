@@ -61,12 +61,8 @@ def rsa_decrypt_data(ciphertext, private_key):
         # Unpad the data after decryption
         decoded_data = base64.b64decode(encoded_data)
 
-        # Log the decoded value for debugging
-        # print(f"Decoded value: {decoded_data}")
-
         return decoded_data.decode()
     except ValueError as e:
-        # print(f"Decryption error: {e}")
         return None
 
 
