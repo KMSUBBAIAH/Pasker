@@ -11,3 +11,4 @@ env_vars.py
 *.txt
 test.py
 rfid_authenticate.py
+.gitignore
