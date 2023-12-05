@@ -1,0 +1,91 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="{% static './css/pasker-ui.css' %}">
+  <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+  <!-- <link rel="stylesheet" type="text/css" href="{% static 'password_locker/main.css' %}"> -->
+  <title>{% block title %}Blog App{% endblock %}</title>
+</head>
+<body class="bg-black text-gray-200 h-screen">
+  <header>
+    <!-- Main Navbar -->
+    <nav class="nav-bar bg-zinc-700">
+        <div class="mx-6">
+          <a class="nav-icon" href="{% url 'blog-base' %}">Pasker</a>
+        </div>
+        <div class="flex md:flex md:flex-grow flex-row space-x-1">
+            <a class="nav-icon" aria-current="page" href="{% url 'blog-home' %}">Home</a>
+            <a class="nav-icon" href="{% url 'blog-about' %}">About</a>
+            {% if user.authentication.is_authorized %}
+              <a class="nav-icon" href="{% url 'credentials_view' %}">Password Locker</a>
+              <a class="nav-icon" href="{% url 'post-create' %}">New Post</a>
+              <a class="nav-icon" href="{% url 'profile' %}">Profile</a>
+              <a class="nav-icon" href="{% url 'logout' %}">Logout</a>
+            {% else %}
+              <a class="nav-icon" href="{% url 'login' %}">Login</a>
+              <a class="nav-icon" href="{% url 'register' %}">Register</a>
+            {% endif %}
+        </div>
+    </nav>
+    <!-- Secondary Navbar -->
+    <nav class="nav-bar bg-zinc-800 border-zinc-500">
+        <div class="flex mx-6 md:flex md:flex-grow flex-row space-x-1">
+          <a href="{% url 'credentials_view' %}">
+            <img src="{% static 'password_locker/pl300.png' %}" alt="Pasker">
+          </a>
+        </div>
+        <div class="flex mr-6 md:flex md:flex-grow flex-row justify-end">
+          <form class="flex" method="GET" role="search" action="{% url 'credentials_view' %}">
+            <!-- <select class="text-black checked:bg-blue-500" name="selected_team">
+              {% for team in teams %}
+                <option value="{{ team.name }}">{{ team.name }}</option>
+              {% endfor %}
+            </select>
+            <button class="nav-icon" type="submit">X</button> -->
+            <input class="input-credential" name="search" type="search" placeholder="Search" aria-label="Search">
+            <button class="nav-icon" type="submit" >Search</button>
+            <button class="nav-icon"><a href="{% url 'credential-create'%}">Create</a></button>
+          </form>
+        </div>
+    </nav>
+  </header>
+  
+  <main class="flex flex-row justify-around">
+    <!-- Main Table -->
+    <div class="flex flex-col items-start w-8/12 min-h-screen bg-black px-4">
+      <div class="flex flex-col mt-2">
+        <div class="-my-2 overflow-x-auto sm:-mx-6 lg:-mx-8">
+          <div class="py-2 align-middle inline-block min-w-full sm:px-6 lg:px-8">
+            <div class="shadow overflow-hidden sm:rounded-lg">
+            {% block content %}
+            {% endblock %}
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- Sidebar Part -->
+    <div class="flex flex-col items-center w-1/4 min-h-screen bg-black">
+      <div class="flex flex-col mt-2">
+        <div class="-my-2 overflow-x-auto sm:-mx-6 lg:-mx-8">
+          <div class="py-2 align-middle inline-block min-w-full sm:px-4 lg:px-6">
+            <div class="shadow overflow-hidden sm:rounded-lg">
+              <div class="mx-4 justify-center" id="sidebar">
+                {% block sidebar %}
+                {% endblock %}
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </main>
+  <!-- Scripts -->
+  <script type="text/javascript" src="{% static 'password_locker/view.js' %}"></script>
+
+</body>
+</html>
+

@@ -1,0 +1,53 @@
+{% extends "blogapp/base.html" %}
+{% load crispy_forms_tags %}
+{% block content %}
+    <div class="content-section">
+        <form method="POST">
+            {% csrf_token %}
+            <fieldset class="form-group">
+                <legend class="border-bottom mb-4">Join Today</legend>
+                <!-- {{ form.team | as_crispy_field }} -->
+                <!-- {{ form.role | as_crispy_field }} -->
+                <!-- Other form fields go here -->
+                {{form | crispy}}
+                <button class="btn btn-outline-info" type="submit">Sign Up</button>
+            </fieldset>
+        </form>
+        <div class="border-top pt-3">
+            <small class="text-muted">
+                Already Have An Account? <a class="ml-2" href="{% url 'login' %}">Sign In</a>
+            </small>
+        </div>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+    <script>
+        $(document).ready(function() {
+            function updateRoleChoices() {
+                var selectedTeam = $('#id_team').val();
+                console.log('Selected Team:', selectedTeam);
+                var roleSelect = $('#id_role');
+                console.log('Role Select:', roleSelect);
+                // var roleChoices = JSON.parse("{{ form.role_choices|safe|escapejs }}")[selectedTeam] || [];
+                var roleChoices = JSON.parse(document.getElementById('role_choices').textContent)[selectedTeam] || [];
+                console.log('Role Choices:', roleChoices);
+
+                roleSelect.empty();
+                $.each(roleChoices, function (index, role) {
+                    roleSelect.append($('<option>', {
+                        value: role[0],
+                        text: role[1]
+                    }));
+                });
+            }
+
+            // Initial update on page load
+            updateRoleChoices();
+
+            // Update role choices when team selection changes
+            $('#id_team').change(updateRoleChoices);
+        });
+    </script>
+    {{ form.role_choices|json_script:"role_choices" }}
+{% endblock content %}
+

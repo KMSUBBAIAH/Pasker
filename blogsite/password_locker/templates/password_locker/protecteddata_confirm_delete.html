@@ -1,0 +1,17 @@
+{% extends "password_locker/protecteddata_detail.html" %}
+{% block delete-block %}
+    <div class="flex-row mt-2 justify-start">
+        <form method="POST">
+            {% csrf_token %}
+            <!-- <fieldset class="flex-row mt-2 mx-3 justify-start"> -->
+                <h2><strong>Are you sure?</strong></h2>
+            <!-- </fieldset> -->
+            <div class="flex-row mt-2 justify-start">
+                <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded" name="delete-submit" type="submit">
+                    Yes, Delete
+                </button>
+                <a class="text-white font-bold py-2 px-4 rounded" href="{% url 'credential-detail' object.id %}">Cancel</a>
+            </div>
+        </form>
+    </div>
+{% endblock %}

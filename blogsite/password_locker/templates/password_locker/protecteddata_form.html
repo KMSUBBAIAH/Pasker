@@ -1,0 +1,67 @@
+{% extends 'password_locker/credentials.html' %}
+{% load crispy_forms_tags %}
+{% block sidebar %}
+    <div class="content-section">
+        <form method="POST" class="max-w-md mx-auto" id="credential-form">
+            {% csrf_token %}
+            {% if is_update %}
+            <div id="update-credential">
+                <legend class="border-b mb-4 font-bold text-lg">Update Credential</legend>
+                <div class="mb-4">
+                    <label for="service_name" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
+                        Service Name
+                    </label>
+                    <input type="text" id="service_name" name="service_name" value="{{object.service_name}}" class="input-credential">
+                </div>
+                <div class="mb-4">
+                    <label for="username" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
+                        Username
+                    </label>
+                    <input type="text" id="username" name="service_username" value="{{ object.service_username}}" class="input-credential">
+                </div>
+                <div class="mb-4">
+                    <label for="password" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
+                        Password
+                    </label>
+                    <input type="text" id="password" name="service_password" value="{{object.service_password}}" class="input-credential">
+                </div>
+                <div class="mt-2">
+                    <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded" type="submit"  id="submit-button">
+                        Submit
+                    </button>
+                </div>
+            </div>
+            {% else %}
+            <div id="create-credential">
+                <legend class="border-b mb-4 font-bold text-lg">Add Credentials</legend>
+                <div class="mb-4">
+                    <label for="service_name" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
+                        Service Name
+                    </label>
+                    <input type="text" id="service_name" name="service_name"  class="input-credential">
+                </div>
+                <div class="mb-4">
+                    <label for="username" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
+                        Username
+                    </label>
+                    <input type="text" id="username" name="service_username" class="input-credential">
+                </div>
+                <div class="mb-4">
+                    <label for="password" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
+                        Password
+                    </label>
+                    <input type="text" id="password" name="service_password" class="input-credential">
+                </div>
+                <div class="mt-2">
+                    <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded" name="generate-password" type="submit"  id="generate-button">
+                        Generate Password
+                    </button>
+                    <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded" type="submit"  id="submit-button">
+                        Submit
+                    </button>
+                </div>
+            </div>
+            {% endif %}
+        </form>
+    </div>
+{% endblock %}

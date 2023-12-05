@@ -1,0 +1,13 @@
+/venv
+/local-cdn
+/data
+*.json
+/node_modules
+**/__pycache__
+**/migrations
+load.script
+env_vars.py
+*/templates
+*.txt
+test.py
+rfid_authenticate.py
