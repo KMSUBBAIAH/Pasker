@@ -1,4 +1,4 @@
-Note: this is not a blogsite, well technically it started out as a blogsite project, but deviated towards a credential management system, the password_locker being the cms.
+> Note: This project is a blogsite project, with a password locker(credential management) app
 # Credential Management System (CMS)
 Welcome to the Credential Management System (CMS) project! This system is designed to provide a secure and efficient solution for managing credentials, utilizing advanced features such as RFID two-factor authentication, CRUD operations, and RSA7680 asymmetric encryption, all powered by the django web framework.
 
